@@ -114,7 +114,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("💳 Оплатить 490 ₽ через Ozon Банк", url=PAYMENT_URL)],
         [InlineKeyboardButton("✅ Я оплатил", callback_data="i_paid")]
     ])
- with open(QR_IMAGE, "rb") as photo:
+    with open(QR_IMAGE, "rb") as photo:
         await update.message.reply_photo(
             photo=photo,
             caption=text,
@@ -222,7 +222,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="HTML"
         )
 
-        await query.edit_message_caption(
+       await query.edit_message_caption(
             caption=f"✅ ОДОБРЕНО\nПользователь {user_id} получил доступ.",
             parse_mode="HTML"
         )
