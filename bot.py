@@ -30,7 +30,7 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO,
 )
-logger = logging.getLogger(name)
+logger = logging.getLogger(__name__)
 
 
 # ================== ЗАГРУЗКА/СОХРАНЕНИЕ ДАННЫХ ==================
@@ -222,7 +222,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="HTML"
         )
 
-       await query.edit_message_caption(
+        await query.edit_message_caption(
             caption=f"✅ ОДОБРЕНО\nПользователь {user_id} получил доступ.",
             parse_mode="HTML"
         )
@@ -237,7 +237,7 @@ async def admin_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                  "Пожалуйста, отправьте корректный чек повторно или напишите администратору.",
             parse_mode="HTML"
         )
-await query.edit_message_caption(
+        await query.edit_message_caption(
             caption=f"❌ ОТКЛОНЕНО\nПользователь {user_id} уведомлён.",
             parse_mode="HTML"
         )
@@ -254,7 +254,7 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(handle_i_paid, pattern="i_paid"))
     app.add_handler(CallbackQueryHandler(admin_callback))
-    app.add_handler(MessageHandler(filters.PHOTO & \~filters.COMMAND, handle_photo))
+    app.add_handler(MessageHandler(filters.PHOTO & ~filters.COMMAND, handle_photo))
     app.add_handler(MessageHandler(filters.Regex("Купить доступ"), start))
 
     logger.info("🚀 Over Leader Bot успешно запущен и готов к работе!")
